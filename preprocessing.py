@@ -6,20 +6,6 @@ from tqdm import tqdm
 import argparse
 
 
-# parse console command arguments
-"""parser = argparse.ArgumentParser()
-parser.add_argument("-i", "--datasetId", required=True, help="id of the dataset")
-parser.add_argument("-n", "--nationalities", required=True, help="all chosen nationalities")
-
-args = vars(parser.parse_args())
-if args["datasetId"] != None:
-    dataset_name = args["datasetId"]
-if args["nationalities"] != None:
-    nationalities = args["nationalities"]
-    assert list(nationalities)[0] == "{" and list(nationalities)[-1] == "}", "wrong nationality list format (correct: {'nationality1', 'nationality2', ..., 'nationalityN'}"
-    nationalities = nationalities.replace("{'", "").replace("'}", "").split("', '")"""
-
-
 def get_matrix_from_name(name: str, abc_dict: list):
     matrix = []
     for letter in name:

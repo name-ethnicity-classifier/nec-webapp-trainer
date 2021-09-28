@@ -4,7 +4,7 @@ from tqdm import tqdm
 import numpy as np
 import os
 import json
-import sklearn
+import sklearn.metrics
 import hashlib
 import torch
 import torch.nn as nn

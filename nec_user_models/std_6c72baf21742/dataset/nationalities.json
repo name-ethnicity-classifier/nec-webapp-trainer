@@ -1,0 +1,13 @@
+{
+    "else": 0,
+    "british": 1,
+    "indian": 2,
+    "spanish": 3,
+    "german": 4,
+    "italian": 5,
+    "french": 6,
+    "chinese": 7,
+    "japanese": 8,
+    "dutch": 9,
+    "russian": 10
+}

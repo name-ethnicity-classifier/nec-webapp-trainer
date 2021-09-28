@@ -1,0 +1,4 @@
+/__pycache__
+/dataset/total_names_dataset.pickle
+db_config.py
+/final_model/__pycache__

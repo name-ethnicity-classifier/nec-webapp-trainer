@@ -1,0 +1,10 @@
+{
+    "african": 0,
+    "celtic": 1,
+    "eastAsian": 2,
+    "european": 3,
+    "hispanic": 4,
+    "muslim": 5,
+    "nordic": 6,
+    "southAsian": 7
+}

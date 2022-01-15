@@ -4,3 +4,5 @@
 /final_model/__pycache__
 /nec_user_models/*
 !/nec_user_models/.gitkeep
+/x-manager/*
+!/x-manager/.gitkeep

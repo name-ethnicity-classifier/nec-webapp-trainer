@@ -1,4 +1,6 @@
 /__pycache__
 /dataset/total_names_dataset.pickle
-db_config.py
+.env
 /final_model/__pycache__
+/nec_user_models/*
+!/nec_user_models/.gitkeep

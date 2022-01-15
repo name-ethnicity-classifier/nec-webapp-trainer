@@ -1,10 +1,10 @@
 FROM python:3.9
-WORKDIR "./app"
+WORKDIR "/app"
 
 COPY . .
 
-RUN apt-get update
-RUN apt install libpq-dev
+# RUN apt-get update
+# RUN apt install libpq-dev
 
 RUN pip install numpy
 RUN pip install pandas
@@ -15,5 +15,6 @@ RUN pip install pickle5
 RUN pip install tqdm
 RUN pip install scikit-learn
 RUN pip install psycopg2
+RUN pip install python-dotenv
 
 CMD ["python", "-u", "./train_jobs.py"]

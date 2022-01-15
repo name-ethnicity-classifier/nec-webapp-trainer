@@ -37,6 +37,7 @@ def get_open_jobs(connection: pg.extensions.connection, queue_file: str="") -> l
             updated_job_entries[row[columns.index("model_id")]] =  {
                 "time": str(datetime.datetime.now()).split(".")[0],
                 "nationalities": row[columns.index("nationalities")],
+                "isGroupLevel": row[columns.index("is_group_level")],
                 "ready": first_in_queue
             }
             first_in_queue = False

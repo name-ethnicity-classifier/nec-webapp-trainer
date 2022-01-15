@@ -1,1 +1,1 @@
-## This repository contains the code of the automatical model training for the name-ethnicity-classifier webapp.
+## This repository contains the code for the automatical model training for the name-2-ethnicity webapp.

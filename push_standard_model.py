@@ -3,8 +3,32 @@ import os
 import uuid
 import shutil
 from datetime import datetime
-from run_next_job import create_job_space
-from utils import connect_to_db, load_json, write_json
+import psycopg2 as pg
+import json
+from db_config import *
+
+
+def connect_to_db() -> pg.extensions.connection:
+    connection = pg.connect(
+        host=HOST,
+        database=DATABASE,
+        user=USER,
+        password=PASSWORD,
+        port=PORT
+    )
+
+    return connection
+
+
+def load_json(file_path: str) -> dict:
+    with open(file_path, "r") as f:
+        return json.load(f)
+
+
+def write_json(file_path: str, content: dict) -> None:
+    with open(file_path, "w") as f:
+            json.dump(content, f, indent=4)
+
 
 
 def push_standard_model(model_name: str, model_config: dict, nationalities: dict, accuracy: float, scores: list):
@@ -58,15 +82,15 @@ def push_standard_model(model_name: str, model_config: dict, nationalities: dict
 
 
 if __name__ == "__main__":
-    model_name = "20_most_occuring_nationalities"
+    model_name = "8_nationality_groups"
 
     model_config = {
         "model-name": model_name,
         "dataset-name": model_name,
-        "test-size": 0.2,
+        "test-size": 0.1,
         "optimizer": "Adam",
         "loss-function": "NLLLoss",
-        "epochs": 4,
+        "epochs": 5,
         "batch-size": 512,
         "cnn-parameters": [
             1,
@@ -82,39 +106,46 @@ if __name__ == "__main__":
             0.95,
             100
         ],
-        "dropout-chance": 0.3,
+        "dropout-chance": 0.35,
         "embedding-size": 200,
-        "augmentation": 0.2,
+        "augmentation": 0.0,
         "resume": False
     }
 
-    nationalities = {
-        "british": 0,
-        "norwegian": 1,
-        "indian": 2,
-        "irish": 3,
-        "spanish": 4,
-        "american": 5,
-        "german": 6,
-        "polish": 7,
-        "bulgarian": 8,
-        "turkish": 9,
-        "pakistani": 10,
-        "italian": 11,
-        "romanian": 12,
-        "french": 13,
-        "australian": 14,
-        "chinese": 15,
-        "swedish": 16,
-        "nigerian": 17,
-        "dutch": 18,
-        "filipino": 19
-    }
+    nationalities = { "african": 0, "celtic": 1, "eastAsian": 2, "european": 3, "hispanic": 4, "muslim": 5, "nordic": 6, "southAsian": 7 }
 
-    accuracy = 74.99
-    scores = [ [0.36707, 0.83376, 0.75889, 0.6412, 0.79855, 0.45995, 0.70518, 0.92881, 0.94288, 0.89543, 0.77127, 0.83323, 0.91462, 0.69721, 0.32094, 0.93804, 0.70131, 0.82266, 0.73316, 0.77938], 
-               [0.37027, 0.74202, 0.87621, 0.68428, 0.78559, 0.37891, 0.6915, 0.94768, 0.95234, 0.94977, 0.93293, 0.78988, 0.92743, 0.73524, 0.24303, 0.9776, 0.67293, 0.91383, 0.63855, 0.81792], 
-               [0.36866, 0.78522, 0.81334, 0.66204, 0.79202, 0.41552, 0.69827, 0.93815, 0.94759, 0.9218, 0.84443, 0.81098, 0.92098, 0.71572, 0.2766, 0.95741, 0.68683, 0.86585, 0.68259, 0.79819]
-             ]
+    accuracy = 83.55
+    scores = [ 
+                [
+                    0.78027,
+                    0.77587,
+                    0.92084,
+                    0.79832,
+                    0.89376,
+                    0.76134,
+                    0.91953,
+                    0.85903
+                ], 
+               [
+                    0.74547,
+                    0.75585,
+                    0.94174,
+                    0.796,
+                    0.87667,
+                    0.92604,
+                    0.77413,
+                    0.86783
+            ], 
+               [
+                    0.76247,
+                    0.76573,
+                    0.93117,
+                    0.79716,
+                    0.88513,
+                    0.83565,
+                    0.84059,
+                    0.86341
+            ]
+        ]
     
     push_standard_model(model_name, model_config, nationalities, accuracy, scores)

@@ -6,7 +6,8 @@ import traceback
 
 from logger import Logging
 from utils import connect_to_db, load_json, write_json
-from preprocessing import preprocess
+from preprocessing import preprocess_nationalities, preprocess_groups
+#from preprocessing_groups import preprocess_groups
 from final_model.train_model import trainer
 
 
@@ -25,7 +26,7 @@ def get_next_job(queue_file: str="") -> Union[int, tuple]:
     if next_job["ready"] == False:
         return -2
 
-    return (next_job_id, next_job["nationalities"])
+    return (next_job_id, next_job["nationalities"], next_job["isGroupLevel"])
 
 
 def create_job_space(job_id: str=""):
@@ -94,7 +95,7 @@ def run_next_job():
         logger.warn("next job not ready yet.", br=True)
 
     else:
-        job_id, nationalities = next_job[0], next_job[1]
+        job_id, nationalities, is_group_level = next_job[0], next_job[1], next_job[2]
         logger.info("starting next job: [{}]".format(job_id), br=True)
 
         try:
@@ -105,7 +106,13 @@ def run_next_job():
             # preprocess the data for the next job
             logger.info("started preprocessing job [{}].".format(job_id))
             start = time.time()
-            preprocess(job_id=job_id, nationalities=nationalities, raw_dataset_path="dataset/total_names_dataset.pickle")
+
+            # check if the chosen classes are nationality groups or single nationalities
+            if is_group_level:
+                preprocess_groups(job_id=job_id, groups=nationalities, raw_dataset_path="dataset/total_names_dataset.pickle")
+            else:
+                preprocess_nationalities(job_id=job_id, nationalities=nationalities, raw_dataset_path="dataset/total_names_dataset.pickle")
+
             logger.log("-> finished preprocessing job [{}] (took: {} seconds).".format(job_id, round(time.time() - start, 3)), show_time=False, tab=1)
 
             # initialize train setup

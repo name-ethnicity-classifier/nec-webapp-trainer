@@ -17,6 +17,6 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
       - uses: actions/checkout@v2
       - name: create image from repository
-        run: docker build -t ghcr.io/name-ethnicity-classifier/nec-webapp-client .
+        run: docker build -t ghcr.io/name-ethnicity-classifier/nec-model-trainer .
       - name: push image to GitHub Container Registry
-        run: docker push ghcr.io/name-ethnicity-classifier/nec-webapp-client
+        run: docker push ghcr.io/name-ethnicity-classifier/nec-model-trainer

@@ -12,9 +12,9 @@ load_dotenv()
 logger = Logging(log_file="nec.log")
 logger.log("starting train daemon.", tag="DAEMON")
 
-JOBS_TO_TRAIN = os.getenv("JOBS_TO_TRAIN")
-TIME_BETWEEN_JOBS = os.getenv("TIME_BETWEEN_JOBS")
-TRAIN_PAUSE_TIME = os.getenv("TRAIN_PAUSE_TIME")
+JOBS_TO_TRAIN = int(os.getenv("JOBS_TO_TRAIN"))
+TIME_BETWEEN_JOBS = int(os.getenv("TIME_BETWEEN_JOBS"))
+TRAIN_PAUSE_TIME = int(os.getenv("TRAIN_PAUSE_TIME"))
 
 
 while True:

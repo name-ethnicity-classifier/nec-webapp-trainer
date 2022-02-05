@@ -4,6 +4,7 @@ from dotenv import load_dotenv
 from gather_jobs import fetch_jobs
 from run_next_job import run_next_job
 from logger import Logging
+import os
 
 load_dotenv()
 

@@ -1,8 +1,6 @@
 FROM python:3.9
 WORKDIR "/app"
 
-COPY . .
-
 # RUN apt-get update
 # RUN apt install libpq-dev
 
@@ -16,5 +14,7 @@ RUN pip install tqdm
 RUN pip install scikit-learn
 RUN pip install psycopg2
 RUN pip install python-dotenv
+
+COPY . .
 
 CMD ["python", "-u", "./train_jobs.py"]

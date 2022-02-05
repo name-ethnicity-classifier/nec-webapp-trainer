@@ -186,9 +186,9 @@ class TrainSetup:
             epoch_val_loss, epoch_val_accuracy, _ = self._validate(model, self.validation_set)
 
             # print training stats in pretty format
-            if not silent:
-                show_progress(self.epochs, epoch, epoch_train_loss, epoch_train_accuracy, epoch_val_loss, epoch_val_accuracy)
-                print("\nlr: ", optimizer.param_groups[0]["lr"], "\n")
+            # if not silent:
+            show_progress(self.epochs, epoch, epoch_train_loss, epoch_train_accuracy, epoch_val_loss, epoch_val_accuracy)
+            # print("\nlr: ", optimizer.param_groups[0]["lr"], "\n")
 
             # save checkpoint of model
             torch.save(model.state_dict(), self.model_file)

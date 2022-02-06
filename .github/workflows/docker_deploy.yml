@@ -3,7 +3,7 @@ name: name-to-ethnicity web app action
 on:
   push:
     branches:
-      - server
+      - main
 
 jobs:
   docker-push:
